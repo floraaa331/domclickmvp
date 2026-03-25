@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  telegramId BigInt  @unique
+  firstName String?
+  customName String?
+  username  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  calculations Calculation[]
+  checklistProgress ChecklistProgress?
+  actions     UserAction[]
+}
+
+model Calculation {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  propertyType String
+  propertyCost Float
+  downPayment  Float
+  termYears    Int
+  rate         Float
+  monthlyPayment Float
+  totalPayment   Float
+  overpayment    Float
+  createdAt    DateTime @default(now())
+}
+
+model ChecklistProgress {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id])
+  currentStep Int    @default(1)
+  completedSteps String @default("[]")
+  skippedSteps   String @default("[]")
+  updatedAt DateTime @updatedAt
+}
+
+model UserAction {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  action    String
+  details   String?
+  createdAt DateTime @default(now())
+}
