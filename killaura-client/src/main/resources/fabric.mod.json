@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "killaura-client",
+  "version": "${version}",
+  "name": "KillAura Client",
+  "description": "Minecraft 1.21.4 KillAura mod with configurable settings and GUI",
+  "authors": ["KillauraClient"],
+  "contact": {},
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.killaura.KillauraClient"
+    ]
+  },
+  "mixins": [
+    "killaura-client.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.4",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
