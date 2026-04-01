@@ -7,3 +7,9 @@ dist/
 .turbo/
 .vercel/
 tsconfig.tsbuildinfo
+
+# Gradle
+.gradle/
+build/
+killaura-client/.gradle/
+killaura-client/build/
